@@ -8,7 +8,8 @@
     "lint": "eslint . --ext .ts",
     "dev" : "nodemon ./src/app.ts",
     "format": "eslint src/**/*.ts --fix",
-    "build": "tsc"
+    "build": "tsc -p .",
+    "start": "ts-node dist/app.js"
   },
   "author": "Joshua Fuentes",
   "license": "ISC",
