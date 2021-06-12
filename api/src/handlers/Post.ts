@@ -1,11 +1,16 @@
 import { Request, Response } from 'express'
+import AuthGenerator from '../services/auth/Generator'
 
-export const SignUp = async (request: Request, response: Response) => {
+export async function SignUp(
+	request: Request,
+	response: Response
+): Promise<void> {
 	const { email, password } = request.body
 
-	// eslint-disable-next-line no-console
-	console.log(`EMAIL: ${email}`, email, `PWD: ${password}`, password)
+	const authGenerator = new AuthGenerator()
+
+	const token = authGenerator.GenerateToken(email, password)
 
 	response.status(200)
-	response.json(request.body)
+	response.json(token)
 }
