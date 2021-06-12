@@ -30,7 +30,7 @@ jobs:
     - run: tsc -p .
       working-directory: api
     
-    - run: ls 
+    - run: ls dist/
       working-directory: api
 
   deploy-api-app:
