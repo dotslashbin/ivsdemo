@@ -49,6 +49,10 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
+    - name: check the dist
+      working-directory: api
+      run: ls dist/
+
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
