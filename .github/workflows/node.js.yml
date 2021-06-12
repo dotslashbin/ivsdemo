@@ -33,8 +33,8 @@ jobs:
     - name: prepare the prod files
       uses: actions/upload-artifact@v2
       with: 
-        - name: dist-folder
-          path: api/dist
+        name: dist-folder
+        path: api/dist
         
 
   deploy-api-app:
