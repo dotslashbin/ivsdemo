@@ -29,16 +29,13 @@ jobs:
     #   working-directory: api
     - run: tsc -p .
       working-directory: api
-    
-    - name: Temporarily save webpack artifact
+  
+    - name: prepare the prod files
       uses: actions/upload-artifact@v2
-        with:
-          name: webpack-artifact
-          path: build
-          retention-days: 1
-    
-    # - run: ls dist/
-    #   working-directory: api
+      with: 
+        - name: dist-folder
+          path: api/dist
+        
 
   deploy-api-app:
     needs: build-api-app
@@ -60,13 +57,6 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-    
-    - name: Retrieve built package
-      uses: actions/download-artifact@v2
-        with:
-          name: webpack-artifact
-          path: build
-        run: ls 
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
