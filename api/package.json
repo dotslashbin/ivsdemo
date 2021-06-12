@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .ts",
-    "dev" : "nodemon ./src/app.ts",
+    "dev": "nodemon ./src/app.ts",
     "format": "eslint src/**/*.ts --fix",
     "build": "tsc -p .",
     "start": "ts-node dist/app.js"
@@ -14,7 +14,9 @@
   "author": "Joshua Fuentes",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
+    "@types/node": "^15.12.2",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
     "eslint": "^7.28.0",
