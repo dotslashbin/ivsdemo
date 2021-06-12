@@ -21,11 +21,13 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
+    - run: npm install && npm install typescript ts-loader ts-node
       working-directory: api
     - run: npm ci
       working-directory: api
-    - run: npm run build --if-present
+    # - run: npm run build --if-present
+    #   working-directory: api
+    - run: tsc -p .
       working-directory: api
     # - run: npm test
   deploy-api-app:
@@ -48,10 +50,6 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-
-    - name: check the dist
-      working-directory: api
-      run: ls dist/
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
