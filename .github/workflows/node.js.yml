@@ -29,7 +29,10 @@ jobs:
     #   working-directory: api
     - run: tsc -p .
       working-directory: api
-    # - run: npm test
+    
+    - run: ls 
+      working-directory: api
+
   deploy-api-app:
     needs: build-api-app
     name: Deploy
