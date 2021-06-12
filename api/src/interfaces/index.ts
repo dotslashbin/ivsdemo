@@ -21,7 +21,7 @@ export interface EncodeResult {
 	issued: number
 }
 
-export type DecoreResult =
+export type DecodeResult =
 	| { type: 'valid'; session: Session }
 	| { type: 'integrity-error' }
 	| { type: 'invalid-token' }
