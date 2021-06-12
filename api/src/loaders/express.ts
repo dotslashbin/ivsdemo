@@ -1,7 +1,6 @@
 import express from 'express'
 import { VERSION } from '../config'
-// import { SignUp } from '../handlers/Post'
-import bodyParser from 'body-parser'
+import { GetAll, GetOne, SignUp } from '../handlers/Post'
 
 export default ({ app }: { app: express.Application }): void => {
 	// Index -> shows version
@@ -10,13 +9,10 @@ export default ({ app }: { app: express.Application }): void => {
 		response.json({ body: request.body, version: VERSION })
 	})
 
-	app.post(
-		'/sign-up',
-		bodyParser.urlencoded({ extended: true }),
-		(request, response) => {
-			console.log(request.body)
+	// GET
+	app.get('/members', GetAll)
+	app.get('/members/:id', GetOne)
 
-			response.status(200)
-		}
-	)
+	// POST
+	app.post('/sign-up', express.urlencoded({ extended: true }), SignUp)
 }
