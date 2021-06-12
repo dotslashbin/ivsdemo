@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+    ivsapi:
+        image: dotslashbin/ivsdemo_ivsapi
+        networks:
+          ivsnetwork:
+            ipv4_address: 10.6.0.7
+    ivsnginx:
+        restart: always
+        image: dotslashbin/ivsdemo_ivsnginx
+        ports:
+            - "80:80"
+        networks:
+          ivsnetwork:
+            ipv4_address: 10.6.0.8
+networks:
+  ivsnetwork:
+      driver: bridge
+      ipam:
+        config:
+            - subnet: 10.6.0.0/16
+              gateway: 10.6.0.1
+          
