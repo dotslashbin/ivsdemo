@@ -9,19 +9,17 @@ export default class AuthValidator {
 		this.secret = APP_SECRET
 	}
 
-	decodeSession(secretKey: string, tokenString: string): DecodeResult {
+	decodeSession(tokenString: string): DecodeResult {
 		// Always use HS512 to decode the token
 		const algorithm: TAlgorithm = 'HS512'
 
 		let result: Session
 
 		try {
-			result = decode(tokenString, secretKey, false, algorithm)
+			result = decode(tokenString, this.secret, false, algorithm)
 		} catch (_e) {
 			const e: Error = _e
 
-			// These error strings can be found here:
-			// https://github.com/hokaccha/node-jwt-simple/blob/c58bfe5e5bb049015fcd55be5fc1b2d5c652dbcd/lib/jwt.js
 			if (
 				e.message === 'No token supplied' ||
 				e.message === 'Not enough or too many segments'
