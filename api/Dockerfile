@@ -11,7 +11,7 @@ COPY package-lock.json ./
 RUN npm ci --only=production
 
 # Copying files
-COPY dist/ .
+COPY dist/. .
 RUN npm install pm2 -g
 
 # Setting up runtime
