@@ -1,6 +1,6 @@
 import express from 'express'
 import { VERSION } from '../config'
-import { GetAll, GetOne, SignUp } from '../handlers/Post'
+import { GetAll, GetOne, SignUp } from '../handlers'
 
 export default ({ app }: { app: express.Application }): void => {
 	// Index -> shows version
@@ -11,7 +11,7 @@ export default ({ app }: { app: express.Application }): void => {
 
 	// GET
 	app.get('/members', GetAll)
-	app.get('/members/:id', GetOne)
+	app.get('/members/:text', GetOne)
 
 	// POST
 	app.post('/sign-up', express.urlencoded({ extended: true }), SignUp)
