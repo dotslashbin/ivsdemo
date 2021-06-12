@@ -1,6 +1,6 @@
 {
   "name": "ivs_api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "REST API service provider for authentication",
   "main": "index.js",
   "scripts": {
