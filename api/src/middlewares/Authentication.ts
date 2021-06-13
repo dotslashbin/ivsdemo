@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { ExtractToken } from '../helpers/Requests'
 import AuthValidator from '../services/auth/AuthValidator'
-import { DecodeResult } from '../interfaces'
+import { DecodeResult } from '../interfaces/Authentication'
 import { Unauthorized } from '../helpers/Response'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
