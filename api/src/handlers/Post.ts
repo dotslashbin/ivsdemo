@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import AuthGenerator from '../services/auth/Generator'
+import AuthGenerator from '../services/auth/AuthGenerator'
 
 export async function SignUp(
 	request: Request,
