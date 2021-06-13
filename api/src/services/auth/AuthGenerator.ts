@@ -1,6 +1,6 @@
 import { encode, TAlgorithm } from 'jwt-simple'
 import { APP_SECRET } from '../../config'
-import { EncodeResult, PartialSession, Session } from '../../interfaces'
+import { EncodeResult, PartialSession, Session } from '../../interfaces/Authentication'
 
 export default class AuthGenerator {
 	private secret: string
