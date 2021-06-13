@@ -7,7 +7,7 @@ import { RunAuthentication } from '../middlewares/Authentication'
 export default async function (expressApp: any): Promise<any> {
 	expressApp.use(cors())
 	expressApp.use(helmet())
-	expressApp.use(RunAuthentication)
+	expressApp.use('/members', RunAuthentication)
 
 	// Express
 	await expressLoader({ app: expressApp })

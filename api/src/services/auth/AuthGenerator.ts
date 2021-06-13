@@ -1,6 +1,10 @@
 import { encode, TAlgorithm } from 'jwt-simple'
 import { APP_SECRET } from '../../config'
-import { EncodeResult, PartialSession, Session } from '../../interfaces'
+import {
+	EncodeResult,
+	PartialSession,
+	Session,
+} from '../../interfaces/Authentication'
 
 export default class AuthGenerator {
 	private secret: string
@@ -8,10 +12,7 @@ export default class AuthGenerator {
 		this.secret = APP_SECRET
 	}
 
-	GenerateToken(email: string, password: string): any {
-		const id = 'abc'
-		const name = password
-
+	GenerateToken(id: string, email: string, name: string): EncodeResult {
 		return this.getEncodedToken({ id, email, name })
 	}
 

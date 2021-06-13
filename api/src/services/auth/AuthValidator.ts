@@ -1,6 +1,6 @@
 import { APP_SECRET } from '../../config'
 import { decode, TAlgorithm } from 'jwt-simple'
-import { DecodeResult, Session } from '../../interfaces'
+import { DecodeResult, Session } from '../../interfaces/Authentication'
 
 export default class AuthValidator {
 	private secret: string
