@@ -1,7 +1,7 @@
 import { prop } from '@typegoose/typegoose'
 
 export class Member {
-	@prop({ required: true })
+	@prop({ required: true,  })
 	email!: string
 
 	@prop({ required: true })
