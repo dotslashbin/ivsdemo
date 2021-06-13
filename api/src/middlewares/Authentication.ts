@@ -12,21 +12,22 @@ export const RunAuthentication = (
 ) => {
 	const token = ExtractToken(request)
 
-	if (!token) {
-		Unauthorized('Missing token', response)
-		return
-	}
-
 	const validator = new AuthValidator()
 	const decodedSession: DecodeResult = validator.decodeSession(token)
+
+	// TODO: check for token expiry
+
+	if (
+		decodedSession.type === 'integrity-error' ||
+		decodedSession.type === 'invalid-token'
+	) {
+		Unauthorized(`Token validaton failed: ${decodedSession.type}`, response)
+	}
 
 	response.locals = {
 		...response.locals,
 		session: decodedSession,
 	}
-
-	// eslint-disable-next-line no-console
-	console.log(response)
 
 	next()
 }
