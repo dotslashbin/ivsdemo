@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { ExtractToken } from '../helpers/Requests'
-import AuthValidator from '../services/auth/Validator'
+import AuthValidator from '../services/auth/AuthValidator'
 import { DecodeResult } from '../interfaces'
 import { Unauthorized } from '../helpers/Response'
 
