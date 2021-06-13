@@ -12,10 +12,7 @@ export default class AuthGenerator {
 		this.secret = APP_SECRET
 	}
 
-	GenerateToken(email: string, password: string): EncodeResult {
-		const id = 'abc'
-		const name = password
-
+	GenerateToken(id: string, email: string, name: string): EncodeResult {
 		return this.getEncodedToken({ id, email, name })
 	}
 

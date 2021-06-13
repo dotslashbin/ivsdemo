@@ -6,7 +6,7 @@ export interface Session {
 	expires: number
 }
 
-export type PartialSession = Omit<Session, 'issued' | 'expires' | 'password'>
+export type PartialSession = Omit<Session, 'issued' | 'expires'>
 
 export interface EncodeResult {
 	token: string
