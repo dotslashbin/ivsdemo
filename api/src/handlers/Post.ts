@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { ReturnError, ReturnSuccess } from '../helpers/Response'
 import { MongoWriter } from '../db/MongoWriter'
 import MemberWriter from '../services/members/MemberWriter'
 
@@ -14,6 +15,9 @@ export async function SignUp(
 		dbInUse
 	)
 
-	response.status(200)
-	response.json(newMember)
+	if (newMember.errors) {
+		ReturnError(422, response, newMember)
+	}
+
+	ReturnSuccess(200, response, newMember)
 }

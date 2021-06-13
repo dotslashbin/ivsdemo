@@ -28,7 +28,8 @@ export default class MemberWriter {
 			}
 		} catch (error) {
 			// eslint-disable-next-line no-console
-			console.log(`MongoWriter ERROR: ${error}}`)
+			// TODO: implement object wrapper
+			return error
 		}
 	}
 }
