@@ -1,16 +1,19 @@
 import { Request, Response } from 'express'
-import AuthGenerator from '../services/auth/AuthGenerator'
+import { MongoWriter } from '../db/MongoWriter'
+import MemberWriter from '../services/members/MemberWriter'
 
 export async function SignUp(
 	request: Request,
 	response: Response
 ): Promise<void> {
-	const { email, password } = request.body
+	const { email, name, password } = request.body
 
-	const authGenerator = new AuthGenerator()
-
-	const token = authGenerator.GenerateToken(email, password)
+	const dbInUse = new MongoWriter()
+	const newMember = await MemberWriter.InsertNew(
+		{ email, name, password },
+		dbInUse
+	)
 
 	response.status(200)
-	response.json(token)
+	response.json(newMember)
 }
