@@ -20,9 +20,9 @@ export async function GetAll(
 
 	if (members.errors) {
 		ReturnError(422, response, members.errors, RESPONSE_MESSAGES.RETRIEVE_FAIL)
+	} else {
+		ReturnSuccess(200, response, members, RESPONSE_MESSAGES.RETRIEVE_SUCCESS)
 	}
-
-	ReturnSuccess(200, response, members, RESPONSE_MESSAGES.RETRIEVE_SUCCESS)
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -37,7 +37,7 @@ export async function GetOne(
 
 	if (member.errors) {
 		ReturnError(422, response, member.errors, RESPONSE_MESSAGES.RETRIEVE_FAIL)
+	} else {
+		ReturnSuccess(200, response, member, RESPONSE_MESSAGES.RETRIEVE_SUCCESS)
 	}
-
-	ReturnSuccess(200, response, member, RESPONSE_MESSAGES.RETRIEVE_SUCCESS)
 }

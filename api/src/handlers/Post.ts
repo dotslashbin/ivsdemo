@@ -18,7 +18,7 @@ export async function SignUp(
 
 	if (newMember.errors) {
 		ReturnError(422, response, newMember, RESPONSE_MESSAGES.SIGNUP_FAIL)
+	} else {
+		ReturnSuccess(200, response, newMember, RESPONSE_MESSAGES.SIGNUP_SUCCESS)
 	}
-
-	ReturnSuccess(200, response, newMember, RESPONSE_MESSAGES.SIGNUP_SUCCESS)
 }
