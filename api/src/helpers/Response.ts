@@ -25,10 +25,17 @@ export const Unauthorized = (
 export const ReturnSuccess = (
 	status: number,
 	response: Response,
-	data: any
+	data: any,
+	message: string
 ): void => {
+	const returnFormat = {
+		data,
+		status,
+		message,
+	}
+
 	response.status(status)
-	response.json(data)
+	response.json(returnFormat)
 }
 
 /**
@@ -40,8 +47,15 @@ export const ReturnSuccess = (
 export const ReturnError = (
 	status: number,
 	response: Response,
-	data: any
+	data: any,
+	message: string
 ): void => {
+	const returnFormat = {
+		message,
+		error: data.message,
+		status,
+	}
+
 	response.status(status)
-	response.json({ error: data.message })
+	response.json(returnFormat)
 }
