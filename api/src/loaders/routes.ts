@@ -11,7 +11,7 @@ export default ({ app }: { app: express.Application }): void => {
 
 	// GET
 	app.get('/members', GetAll)
-	app.get('/members/:text', GetOne)
+	app.get('/members/:memberId', express.urlencoded({ extended: true }), GetOne)
 
 	// POST
 	app.post('/sign-up', express.urlencoded({ extended: true }), SignUp)

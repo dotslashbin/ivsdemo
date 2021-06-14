@@ -30,8 +30,17 @@ export class MongoReader extends DBCore implements DBReader {
 		}
 	}
 
-	FetchOne() {
-		console.log(' fetch one here')
+	FetchOne(params: any): any {
+		const memberModel = getModelForClass(Member)
+		const { memberId } = params
+
+		try {
+			// eslint-disable-next-line no-console
+			return memberModel.findById(memberId)
+		} catch (error) {
+			// eslint-disable-next-line no-console
+			return null
+		}
 	}
 
 	private getSkipFromPage(page: number): number {

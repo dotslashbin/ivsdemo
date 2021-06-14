@@ -1,4 +1,4 @@
-import expressLoader from './express'
+import expressLoader from './routes'
 import cors from 'cors'
 import helmet from 'helmet'
 import { RunAuthentication } from '../middlewares/Authentication'
