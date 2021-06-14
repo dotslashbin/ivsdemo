@@ -2,7 +2,7 @@ name: IVS Demo Pipeline
 
 on:
   push:
-    branches: [ piptest ]
+    branches: [ main ]
 
 jobs:
   build-api-app:
