@@ -1,18 +1,26 @@
 version: "3.8"
 services:
     ivsapi:
-        image: dotslashbin/ivsdemo_ivsapi
+        image: 401895683222.dkr.ecr.us-east-1.amazonaws.com/ivsapi:latest
         networks:
           ivsnetwork:
             ipv4_address: 10.6.0.7
     ivsnginx:
         restart: always
-        image: dotslashbin/ivsdemo_ivsnginx
+        image: 401895683222.dkr.ecr.us-east-1.amazonaws.com/ivsnginx:latest
         ports:
             - "80:80"
         networks:
           ivsnetwork:
             ipv4_address: 10.6.0.8
+    ivsmongodb:
+        image: mongo
+        ports:
+            - "27017:27017"
+        restart: unless-stopped
+        networks:
+          ivsnetwork:
+            ipv4_address: 10.6.0.9
 networks:
   ivsnetwork:
       driver: bridge
