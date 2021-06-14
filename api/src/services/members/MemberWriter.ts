@@ -27,8 +27,6 @@ export default class MemberWriter {
 				token,
 			}
 		} catch (error) {
-			// eslint-disable-next-line no-console
-			// TODO: implement object wrapper
 			return error
 		}
 	}
