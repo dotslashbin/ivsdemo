@@ -5,6 +5,10 @@ services:
         networks:
           ivsnetwork:
             ipv4_address: 10.6.0.7
+        environment:
+          - PORT=3000
+          - TOKEN_SECRET="videostuff"
+          - MONGOURL=mongodb://ivsmongodb:27017/ivsdemo
     ivsnginx:
         restart: always
         image: 401895683222.dkr.ecr.us-east-1.amazonaws.com/ivsnginx:latest
