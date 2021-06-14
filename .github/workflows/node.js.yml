@@ -91,6 +91,7 @@ jobs:
         script: |
           docker-compose down
           docker system prune --force
+          docker image prune -a --force
       
     - name: Deploy new app and run
       uses: appleboy/ssh-action@master
