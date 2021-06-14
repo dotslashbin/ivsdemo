@@ -87,12 +87,10 @@ jobs:
         host: ${{ secrets.SERVER_HOST_IP }}
         username: ${{ secrets.EC2_USERNAME }}
         password: ${{ secrets.EC2_PASSWORD }}
-        source: docker-compose-prod.yaml
         target: /home/${{ secrets.EC2_USERNAME }}
         script: |
           docker-compose down
-          docker system prune -f
-          docker images prune --force
+          docker system prune --force
       
     - name: Deploy new app and run
       uses: appleboy/ssh-action@master
@@ -100,7 +98,6 @@ jobs:
         host: ${{ secrets.SERVER_HOST_IP }}
         username: ${{ secrets.EC2_USERNAME }}
         password: ${{ secrets.EC2_PASSWORD }}
-        source: docker-compose-prod.yaml
         target: /home/${{ secrets.EC2_USERNAME }}
         script: |
-          docker-compose up -d
+          docker-compose up -d 
