@@ -27,7 +27,7 @@ jobs:
     - run: tsc -p .
       working-directory: api
   
-    - name: prepare the prod files
+    - name: prepare the build artifacts
       uses: actions/upload-artifact@v2
       with: 
         name: dist-folder
@@ -53,6 +53,12 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
+
+    - name: fetch build-artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: dist-folder
+        path: api/dist
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
