@@ -13,4 +13,15 @@ export default class MemberReader {
 			return errorObj
 		}
 	}
+
+	static async GetOne(memberId: string, db: DBReader): Promise<any> {
+		try {
+			const member = await db.FetchOne({ memberId })
+			if (member) {
+				return { name: member.name, email: member.email }
+			}
+		} catch (error) {
+			return {...error, errors: true}
+		}
+	}
 }

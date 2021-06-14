@@ -30,13 +30,14 @@ export async function GetOne(
 	request: Request,
 	response: Response
 ): Promise<void> {
-	// eslint-disable-next-line no-console
-	const memberId = request.params.memberId
+	const memberId = request.params.memberId ? request.params.memberId : ''
 
 	const dbInUse = new MongoReader()
-	const member = await dbInUse.FetchOne({ memberId }).catch((error: any) => {
-		ReturnError(422, response, error, RESPONSE_MESSAGES.RETRIEVE_FAIL)
-	})
+	const member = await MemberReader.GetOne(memberId, dbInUse)
+
+	if (member.errors) {
+		ReturnError(422, response, member.errors, RESPONSE_MESSAGES.RETRIEVE_FAIL)
+	}
 
 	ReturnSuccess(200, response, member, RESPONSE_MESSAGES.RETRIEVE_SUCCESS)
 }
