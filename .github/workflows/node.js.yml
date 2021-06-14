@@ -75,7 +75,7 @@ jobs:
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
       working-directory: api
     
-    deployment:
+    ec2-deployment:
       needs: create-app-image
       name: Deploy app in server
       runs-on: ubuntu-latest
