@@ -8,5 +8,5 @@ export interface DBWriter extends DBConnector {
 
 export interface DBReader {
 	FetchOne(): void
-	Fetch(): void
+	Fetch(params: any): any
 }

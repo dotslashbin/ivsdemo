@@ -1,21 +1,25 @@
-import { DBReader, DBWriter } from 'src/interfaces'
+import { DBReader } from 'src/interfaces'
 import DBCore from './DBCore'
 import { getModelForClass } from '@typegoose/typegoose'
 import { Member } from '../models/MemberModel'
 
-export class MongoWriter extends DBCore implements DBReader {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	// Save(params: any): any {
-	// 	const memberModel = getModelForClass(Member)
+export class MongoReader extends DBCore implements DBReader {
+	Fetch(params: any): any {
+		const memberModel = getModelForClass(Member)
 
-	// 	try {
-	// 		return memberModel.create(params)
-	// 	} catch (error) {
-	// 		// eslint-disable-next-line no-console
-	// 		console.error(error)
-	// 	}
+		const { page, limit } = params
+		// eslint-disable-next-line no-console
+		console.log('USE ', page, limit)
 
-	// 	return null
-	// }
-	Fetch() {}
+		try {
+			return memberModel.find()
+		} catch (error) {
+			// eslint-disable-next-line no-console
+			console.error(error)
+		}
+	}
+
+	FetchOne() {
+		console.log(' fetch one here')
+	}
 }
