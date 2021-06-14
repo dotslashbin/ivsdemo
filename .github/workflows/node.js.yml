@@ -91,7 +91,7 @@ jobs:
         target: /home/${{ secrets.EC2_USERNAME }}
         script: |
           docker-compose down
-          doker system prune -f
+          docker system prune -f
           docker images prune --force
       
     - name: Deploy new app and run
