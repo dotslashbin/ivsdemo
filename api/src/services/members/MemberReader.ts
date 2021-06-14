@@ -9,8 +9,7 @@ export default class MemberReader {
 			const results = await db.Fetch(params)
 			return results.map((record: any) => record.name)
 		} catch (error) {
-			const errorObj = { ...error, errors: true }
-			return errorObj
+			return { ...error, errors: true }
 		}
 	}
 
@@ -21,7 +20,7 @@ export default class MemberReader {
 				return { name: member.name, email: member.email }
 			}
 		} catch (error) {
-			return {...error, errors: true}
+			return { ...error, errors: true }
 		}
 	}
 }
