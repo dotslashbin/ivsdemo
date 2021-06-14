@@ -10,7 +10,7 @@ export default ({ app }: { app: express.Application }): void => {
 	})
 
 	// GET
-	app.get('/members', GetAll)
+	app.get('/members', express.urlencoded({ extended: true }), GetAll)
 	app.get('/members/:memberId', express.urlencoded({ extended: true }), GetOne)
 
 	// POST

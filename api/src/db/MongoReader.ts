@@ -14,7 +14,7 @@ export class MongoReader extends DBCore implements DBReader {
 		this.limit = DEFAULT_LIMIT
 	}
 
-	Fetch(params: any): any {
+	Fetch(params: { page: any; limit: any }): any {
 		const memberModel = getModelForClass(Member)
 
 		const { page, limit } = params
