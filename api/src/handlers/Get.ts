@@ -20,9 +20,20 @@ export async function GetAll(
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const GetOne = async (request: Request, response: Response) => {
-	console.log(request.params)
+export async function GetOne(
+	request: Request,
+	response: Response
+): Promise<void> {
+	// eslint-disable-next-line no-console
+	const memberId = request.params.memberId
+
+	const dbInUse = new MongoReader()
+	const member = await dbInUse.FetchOne({ memberId }).catch((error: any) => {
+		// eslint-disable-next-line no-console
+		response.status(422)
+		response.json(error)
+	})
 
 	response.status(200)
-	response.json({ sulod: 'return only one' })
+	response.json(member)
 }
