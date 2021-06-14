@@ -23,7 +23,7 @@ async function startServer() {
 }
 
 function startDatabase() {
-	mongoose.connect('mongodb://localhost:27017/ivsdemo')
+	mongoose.connect(`${process.env.MONGOURL}`)
 }
 
 startDatabase()

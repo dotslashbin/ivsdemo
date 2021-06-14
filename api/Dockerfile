@@ -8,6 +8,7 @@ COPY package.json ./
 COPY package-lock.json ./
 
 # Insetalling dependencies
+RUN npm install
 RUN npm ci --only=production
 
 # Copying files
