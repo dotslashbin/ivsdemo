@@ -16,6 +16,7 @@ services:
             context: ./nginx
         ports:
             - "80:80"
+            - "9080:9080"
         networks:
           ivsnetwork:
             ipv4_address: 10.6.0.8
