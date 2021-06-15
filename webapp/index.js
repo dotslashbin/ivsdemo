@@ -10,6 +10,7 @@
 		var xhr = e.target
 
 		apiResponse = JSON.parse(xhr.responseText)
+
 		if(apiResponse.status == 422) {
 			notification.innerHTML = apiResponse.error
 			notification.style.color = 'red'
@@ -19,10 +20,10 @@
 			
 			document.getElementById('code-output').innerHTML = xhr.responseText
 
-			if(apiResponse.data.id) {
+			if(apiResponse.endPointName === "sign-up") {
 				window.localStorage.setItem('token', apiResponse.data.authentication.token)
 				window.localStorage.setItem('id', apiResponse.data.id)
-			}	else if(apiResponse.data.length > 0) {
+			}	else if(apiResponse.endPointName === "get-all") {
 				const listItems = apiResponse.data.forEach(record => {
 
 					var  li = document.createElement('li')
@@ -37,6 +38,9 @@
 					document.getElementById('member-list-container').appendChild(li)
 
 				})
+			} else if (apiResponse.endPointName === "get-one" ) {
+				document.getElementById('member-name').innerHTML = apiResponse.data.name
+				document.getElementById('member-email').innerHTML = apiResponse.data.email
 			}
 		}
 	}
