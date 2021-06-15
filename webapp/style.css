@@ -10,3 +10,7 @@
 	float: left;
 	padding: '0px 10px 0px 10px';
 }
+
+#code-output {
+	max-width: 300px;
+}

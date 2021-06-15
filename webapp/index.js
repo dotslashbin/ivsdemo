@@ -38,11 +38,10 @@
 	// 		oReq.setRequestHeader('x-vanillaAjaxWithoutjQuery-version', '1.0');
 	// 		oReq.send();
 	// });
-
 	const email = document.getElementById('email_fld')
 	const name = document.getElementById('name_fld')
+
 	const notification = document.getElementById('notification')
-	const registerForm = document.getElementById('signup_form')
 
 	ajax = new XMLHttpRequest()
 
@@ -58,20 +57,21 @@
 		if(apiResponse.status === 200) {
 			notification.innerHTML = apiResponse.message
 			notification.style.color = 'green'
+			
+			document.getElementById('code-output').innerHTML = xhr.responseText
+			
+			if(apiResponse.data.id) {
+				window.localStorage.setItem('token', apiResponse.data.authentication.token)
+				window.localStorage.setItem('id', apiResponse.data.id)
+			}
 		}
 	}
 
-	
+	const registerForm = document.getElementById('signup_form')
 	registerForm.addEventListener('submit', (e) => {
-
-		console.log('Submitting form ...')
-
 		e.preventDefault()
-
 		if(email && name) {
-
-			ajax.open('POST', "http://localhost:3000/Sign-up", true)
-
+			ajax.open('POST', `http://localhost:3000/Sign-up`, true)
 			ajax.responseType = 'text';
 			ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 			ajax.setRequestHeader('Content-Type', 'application/json')
@@ -80,6 +80,15 @@
 				email: email.value 
 			}))
 		}
+	})
 
+	const showAllButton = document.getElementById('showAll_btn')
+	showAllButton.addEventListener('click', (e) => {
+		e.preventDefault()
+		ajax.open('GET', `http://localhost:3000/members`, true)
+		ajax.responseType = 'text'
+		ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+		ajax.setRequestHeader(`Authorization`, `Bearer ${token}`)
+		ajax.send()
 	})
 }());

@@ -11,33 +11,42 @@
             <h1>IVS Demo</h1>
         </div>
         <div class="container">
-            <form class="form-container" method="POST" action="http://localhost:3000/Sign-up" id="signup_form">
-                <div>
-                    <p class="note">Fill up the form to sign up</p>
-                </div>
-                <div>
-                    <input type="text" name="email" id="email_fld" required/>
-                    <label for="email_fld">Email Address(Your username)</label>
-                </div>
-                <div>
-                    <input type="text" name="name" id="name_fld" required/>
-                    <label for="name_fld">Name</label>
-                </div>
-                <div>
-                    <input type="submit" value="Register">
-                </div>
+            <div class="viewer">
+                <form class="form-container" method="POST" action="http://localhost:3000/Sign-up" id="signup_form">
+                    <div>
+                        <p class="note">Fill up the form to sign up</p>
+                    </div>
+                    <div>
+                        <input type="text" name="email" id="email_fld" required/>
+                        <label for="email_fld">Email Address(Your username)</label>
+                    </div>
+                    <div>
+                        <input type="text" name="name" id="name_fld" required/>
+                        <label for="name_fld">Name</label>
+                    </div>
+                    <div>
+                        <input type="submit" value="Register">
+                    </div>
 
-                <div class="notification-container">
-                    <p id="notification"></p>
-                </div>
-            </form>
+                    <div class="notification-container">
+                        <p id="notification"></p>
+                    </div>
+                </form>
+            </div>
+            <div class="viewer">
+                <code id="code-output">
+                    Debug output here
+                </code>
+            </div>
+            <div style="clear: both;"></div>
         </div>
         <hr />
         <div class="container">
             <div class="viewer">
-                <button>Show All</button>
+                <button id="showAll_btn">Show All</button>
                 <div class="member-detail-container">
-                oiufoeu
+                    <ol>
+                    </ol>
                 </div>
             </div>
 
