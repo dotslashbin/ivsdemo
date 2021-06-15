@@ -85,12 +85,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Create webapp artifact
-      run: tar -czf webapp.tar.gz webapp/
-
-    - name: Upload archive to EC2
-      run: scp webapp.tar.gz ${{ secrets.EC2_USERNAME }}:${{ secrets.EC2_PASSWORD }}@${{ secrets.SERVER_HOST_IP }}:/home/ubuntu
-    
     - name: Move artifact to server
       uses: appleboy/ssh-action@master
       with:
@@ -99,7 +93,9 @@ jobs:
         password: ${{ secrets.EC2_PASSWORD }}
         target: /home/${{ secrets.EC2_USERNAME }}
         script: |
-          tar -xzvf webapp.tar.gz
+          cd ivsdemo
+          git pull 
+          git checkout build_frontend
           sudo cp webapp/* /var/www/html/
     
   ec2-deployment:
