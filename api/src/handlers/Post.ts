@@ -8,13 +8,10 @@ export async function SignUp(
 	request: Request,
 	response: Response
 ): Promise<void> {
-	const { email, name, password } = request.body
+	const { email, name } = request.body
 
 	const dbInUse = new MongoWriter()
-	const newMember = await MemberWriter.InsertNew(
-		{ email, name, password },
-		dbInUse
-	)
+	const newMember = await MemberWriter.InsertNew({ email, name }, dbInUse)
 
 	if (newMember.errors) {
 		ReturnError(422, response, newMember, RESPONSE_MESSAGES.SIGNUP_FAIL)

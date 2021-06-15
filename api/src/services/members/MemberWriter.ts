@@ -6,7 +6,6 @@ export default class MemberWriter {
 		params: {
 			email: string
 			name: string
-			password: string
 		},
 		db: DBWriter
 	): Promise<any> {
@@ -23,7 +22,6 @@ export default class MemberWriter {
 				id: result.id,
 				email: result.email,
 				name: result.name,
-				password: result.password,
 				token,
 			}
 		} catch (error) {
