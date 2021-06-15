@@ -2,7 +2,7 @@ name: IVS Demo Pipeline
 
 on:
   push:
-    branches: [ build_frontend ]
+    branches: [ main ]
 
 jobs:
   build-api-app:
@@ -95,7 +95,7 @@ jobs:
         script: |
           cd ivsdemo
           git pull 
-          git checkout build_frontend
+          git checkout main
           git pull
           sudo cp webapp/* /var/www/html/
     
@@ -116,6 +116,8 @@ jobs:
           docker-compose down
           docker system prune --force
           docker image prune -a --force
+          docker volume prune --force
+          docker network prune --force
       
     - name: Deploy new app and run
       uses: appleboy/ssh-action@master
