@@ -60,6 +60,8 @@
 				name: name.value, 
 				email: email.value 
 			}))
+
+			console.log(`sending post done`)
 		}
 	})
 
@@ -72,6 +74,8 @@
 		ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 		ajax.setRequestHeader(`Authorization`, `Bearer ${window.localStorage.getItem('token')}`)
 		ajax.send()
+
+		console.log(`sending getall done`)
 	})
 
 	
