@@ -20,6 +20,8 @@ services:
         networks:
           ivsnetwork:
             ipv4_address: 10.6.0.8
+        volumes:
+          - ./webapp:/usr/share/nginx/html
     ivsmongodb:
         image: mongo
         ports:
