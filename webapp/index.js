@@ -51,7 +51,7 @@
 		e.preventDefault()
 		if(email && name) {
 			console.log('posting for sign up ....')
-			ajax.open('POST', `http://ivsapi:3000/Sign-up`, true)
+			ajax.open('POST', `http://10.6.0.7:3000/Sign-up`, true)
 			ajax.responseType = 'text';
 			ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 			ajax.setRequestHeader('Content-Type', 'application/json')
@@ -69,7 +69,7 @@
 	showAllButton.addEventListener('click', (e) => {
 		console.log('posting get all')
 		e.preventDefault()
-		ajax.open('GET', `http://ivsapi:3000/members`, true)
+		ajax.open('GET', `http://10.6.0.7:3000/members`, true)
 		ajax.responseType = 'text'
 		ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 		ajax.setRequestHeader(`Authorization`, `Bearer ${window.localStorage.getItem('token')}`)
@@ -81,7 +81,7 @@
 	
 	const fetchOne = (id) => {
 		console.log(' posting get one ....')
-		ajax.open('GET', `http://ivsapi:3000/members/${id}`, true)
+		ajax.open('GET', `http://10.6.0.7:3000/members/${id}`, true)
 		ajax.responseType = 'text'
 		ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 		ajax.setRequestHeader(`Authorization`, `Bearer ${window.localStorage.getItem('token')}`)
