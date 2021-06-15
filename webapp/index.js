@@ -59,10 +59,17 @@
 			notification.style.color = 'green'
 			
 			document.getElementById('code-output').innerHTML = xhr.responseText
-			
+
 			if(apiResponse.data.id) {
 				window.localStorage.setItem('token', apiResponse.data.authentication.token)
 				window.localStorage.setItem('id', apiResponse.data.id)
+			}	else if(apiResponse.data.length > 0) {
+				const listItems = apiResponse.data.map(record => {
+					return `<li>${record.name}</li>`
+				})
+
+				document.getElementById('member-list-container').innerHTML = listItems.join('')
+
 			}
 		}
 	}
@@ -71,10 +78,11 @@
 	registerForm.addEventListener('submit', (e) => {
 		e.preventDefault()
 		if(email && name) {
-			ajax.open('POST', `http://localhost:3000/Sign-up`, true)
+			ajax.open('POST', `http://10.6.0.7:3000/Sign-up`, true)
 			ajax.responseType = 'text';
 			ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 			ajax.setRequestHeader('Content-Type', 'application/json')
+
 			ajax.send(JSON.stringify({
 				name: name.value, 
 				email: email.value 
@@ -85,10 +93,22 @@
 	const showAllButton = document.getElementById('showAll_btn')
 	showAllButton.addEventListener('click', (e) => {
 		e.preventDefault()
-		ajax.open('GET', `http://localhost:3000/members`, true)
+		ajax.open('GET', `http://10.6.0.7:3000/members`, true)
 		ajax.responseType = 'text'
 		ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-		ajax.setRequestHeader(`Authorization`, `Bearer ${token}`)
+		ajax.setRequestHeader(`Authorization`, `Bearer ${window.localStorage.getItem('token')}`)
+		console.log(`calling to get ... `)
 		ajax.send()
 	})
+
+	/*
+	const fetchOne = (id) => {
+		ajax.open('GET', `http://10.6.0.7:3000/members/${id}`, true)
+		ajax.responseType = 'text'
+		ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+		ajax.setRequestHeader(`Authorization`, `Bearer ${window.localStorage.getItem('token')}`)
+		ajax.send()
+	}
+	*/
+
 }());

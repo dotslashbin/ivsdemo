@@ -13,4 +13,6 @@
 
 #code-output {
 	max-width: 300px;
+	font-family: monospace;
+	background-color: gainsboro;
 }
