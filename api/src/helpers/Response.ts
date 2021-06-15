@@ -25,12 +25,14 @@ export const Unauthorized = (
 export const ReturnSuccess = (
 	status: number,
 	response: Response,
+	endPointName: string,
 	data: any,
 	message: string
 ): void => {
 	const returnFormat = {
 		data,
 		status,
+		endPointName,
 		message,
 	}
 
