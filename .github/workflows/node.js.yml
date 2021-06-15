@@ -75,9 +75,9 @@ jobs:
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
       working-directory: api
 
-  create-nginx-image:
+  setup-frontend-app:
     needs: create-app-image
-    name: Create the nginx and push to ECR
+    name: Package the files for the testing webapp
     runs-on: ubuntu-latest
     environment: production
 
@@ -85,37 +85,25 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+    - name: Create webapp artifact
+      run: tar -czf webapp.tar.gz webapp/
+
+    - name: Upload archive to EC2
+      run: scp webapp.tar.gz ${{ secrets.EC2_USERNAME }}:${{ secrets.EC2_PASSWORD }}@${{ secrets.SERVER_HOST_IP }}:/home/ubuntu
+    
+    - name: Move artifact to server
+      uses: appleboy/ssh-action@master
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
-
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-
-    - name: Copy the files to be included in nginx
-      run: mv webapp ./nginx/
-
-    - name: Build, tag, and push image to Amazon ECR
-      id: build-image
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ivsnginx
-        IMAGE_TAG: latest
-      run: |
-        # Build a docker container and
-        # push it to ECR so that it can
-        # be deployed to ECS.
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-      working-directory: nginx
+        host: ${{ secrets.SERVER_HOST_IP }}
+        username: ${{ secrets.EC2_USERNAME }}
+        password: ${{ secrets.EC2_PASSWORD }}
+        target: /home/${{ secrets.EC2_USERNAME }}
+        script: |
+          tar -xzvf webapp.tar.gz
+          sudo cp webapp/* /var/www/html/
     
   ec2-deployment:
-    needs: create-nginx-image
+    needs: setup-frontend-app
     name: Deploy app in server
     runs-on: ubuntu-latest
       
@@ -142,3 +130,4 @@ jobs:
         script: |
           aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 401895683222.dkr.ecr.us-east-1.amazonaws.com
           docker-compose up -d 
+          rm -Rf /home/ubuntu/webapp*
