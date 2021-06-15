@@ -7,7 +7,9 @@ export default class MemberReader {
 	): Promise<any> {
 		try {
 			const results = await db.Fetch(params)
-			return results.map((record: any) => record.name)
+			return results.map((record: any) => {
+				return { name: record.name, id: record._id }
+			})
 		} catch (error) {
 			return { ...error, errors: true }
 		}
