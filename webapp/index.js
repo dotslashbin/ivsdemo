@@ -43,7 +43,6 @@
 	const name = document.getElementById('name_fld')
 	const notification = document.getElementById('notification')
 	const registerForm = document.getElementById('signup_form')
-	var actionPath, formData = '' 
 
 	ajax = new XMLHttpRequest()
 
@@ -57,31 +56,29 @@
 		}
 
 		if(apiResponse.status === 200) {
-
+			console.log(apiResponse)
 		}
 	}
 
 	
 	registerForm.addEventListener('submit', (e) => {
+
+		console.log('Submitting form ...')
+
+		e.preventDefault()
+
 		if(email && name) {
-			e.preventDefault()
 
-			formData = new FormData(registerForm)
-			actionPath = registerForm.getAttribute('action')
+			ajax.open('POST', "http://localhost:3000/Sign-up", true)
 
-			console.log(formData)
-
-			ajax.open('POST', actionPath, true)
-			ajax.send(formData)
-			// ajax.responseType = 'text';
-			// ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-			// ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-			// ajax.send(JSON.stringify({
-			// 	name: name.value, 
-			// 	email: email.value 
-			// }))
+			ajax.responseType = 'text';
+			ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+			ajax.setRequestHeader('Content-Type', 'application/json')
+			ajax.send(JSON.stringify({
+				name: name.value, 
+				email: email.value 
+			}))
 		}
-	})
 
-	console.log('The main js func is running')
+	})
 }());
