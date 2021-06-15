@@ -112,7 +112,7 @@ jobs:
       working-directory: api
     
   ec2-deployment:
-    needs: create-app-image
+    needs: create-nginx-image
     name: Deploy app in server
     runs-on: ubuntu-latest
       
