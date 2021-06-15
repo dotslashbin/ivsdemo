@@ -1,4 +1,5 @@
 (function () {
+	console.log('Starting the ajax ...')
 	const email = document.getElementById('email_fld')
 	const name = document.getElementById('name_fld')
 
@@ -49,6 +50,7 @@
 	registerForm.addEventListener('submit', (e) => {
 		e.preventDefault()
 		if(email && name) {
+			console.log('posting for sign up ....')
 			ajax.open('POST', `http://10.6.0.7:3000/Sign-up`, true)
 			ajax.responseType = 'text';
 			ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -63,6 +65,7 @@
 
 	const showAllButton = document.getElementById('showAll_btn')
 	showAllButton.addEventListener('click', (e) => {
+		console.log('posting get all')
 		e.preventDefault()
 		ajax.open('GET', `http://10.6.0.7:3000/members`, true)
 		ajax.responseType = 'text'
@@ -73,6 +76,7 @@
 
 	
 	const fetchOne = (id) => {
+		console.log(' posting get one ....')
 		ajax.open('GET', `http://10.6.0.7:3000/members/${id}`, true)
 		ajax.responseType = 'text'
 		ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
