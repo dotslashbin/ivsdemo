@@ -11,7 +11,7 @@
             <h1>IVS Demo</h1>
         </div>
         <div class="container">
-            <div class="form-container">
+            <form class="form-container" method="POST" action="http://localhost:3000/Sign-up" id="signup_form">
                 <div>
                     <p class="note">Fill up the form to sign up</p>
                 </div>
@@ -24,10 +24,13 @@
                     <label for="name_fld">Name</label>
                 </div>
                 <div>
-                    <button>Register</button>
+                    <input type="submit" value="Register">
                 </div>
+            </form>
+            <div class="notification-container">
+                <p id="notification"></p>
             </div>
         </div>
-        <script src="index.js"></script>
+        <script src="./index.js" async></script>
     </body>
 </html>
