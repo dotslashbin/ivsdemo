@@ -12,7 +12,7 @@ export default class MemberWriter {
 		try {
 			const result = await db.Save(params)
 			const authGenerator = new AuthGenerator()
-			const token = authGenerator.GenerateToken(
+			const authentication = authGenerator.GenerateToken(
 				result.id,
 				result.email,
 				result.name
@@ -22,7 +22,7 @@ export default class MemberWriter {
 				id: result.id,
 				email: result.email,
 				name: result.name,
-				token,
+				authentication,
 			}
 		} catch (error) {
 			return error
