@@ -81,27 +81,17 @@ jobs:
     runs-on: ubuntu-latest
       
     steps:
-    - name: Upload the docker-compose file
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST_IP }}
-        username: ${{ secrets.EC2_USERNAME }}
-        password: ${{ secrets.EC2_PASSWORD }}
-        source: docker-compose-prod.yaml
-        target: /home/${{ secrets.EC2_USERNAME }}
-
     - name: Shutdown current servers
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SERVER_HOST_IP }}
         username: ${{ secrets.EC2_USERNAME }}
         password: ${{ secrets.EC2_PASSWORD }}
-        source: docker-compose-prod.yaml
         target: /home/${{ secrets.EC2_USERNAME }}
         script: |
           docker-compose down
-          doker system prune -f
-          docker images prune --force
+          docker system prune --force
+          docker image prune -a --force
       
     - name: Deploy new app and run
       uses: appleboy/ssh-action@master
@@ -109,7 +99,7 @@ jobs:
         host: ${{ secrets.SERVER_HOST_IP }}
         username: ${{ secrets.EC2_USERNAME }}
         password: ${{ secrets.EC2_PASSWORD }}
-        source: docker-compose-prod.yaml
         target: /home/${{ secrets.EC2_USERNAME }}
         script: |
-          docker-compose up -d
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 401895683222.dkr.ecr.us-east-1.amazonaws.com
+          docker-compose up -d 
