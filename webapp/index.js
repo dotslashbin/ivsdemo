@@ -56,7 +56,8 @@
 		}
 
 		if(apiResponse.status === 200) {
-			console.log(apiResponse)
+			notification.innerHTML = apiResponse.message
+			notification.style.color = 'green'
 		}
 	}
 
