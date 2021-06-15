@@ -1,43 +1,4 @@
 (function () {
-	// var retrieve = document.getElementById('retrieve'),
-	// 		results = document.getElementById('results'),
-	// 		toReadyStateDescription = function (state) {
-	// 				switch (state) {
-	// 				case 0:
-	// 						return 'UNSENT';
-	// 				case 1:
-	// 						return 'OPENED';
-	// 				case 2:
-	// 						return 'HEADERS_RECEIVED';
-	// 				case 3:
-	// 						return 'LOADING';
-	// 				case 4:
-	// 						return 'DONE';
-	// 				default:
-	// 						return '';
-	// 				}
-	// 		};
-	// retrieve.addEventListener('click', function (e) {
-	// 		var bustCache = '?' + new Date().getTime(),
-	// 				oReq = new XMLHttpRequest();
-	// 		oReq.onload = function (e) {
-	// 				var xhr = e.target;
-	// 				console.log('Inside the onload event');
-	// 				if (xhr.responseType === 'json') {
-	// 						results.innerHTML = xhr.response.message;
-	// 				} else {
-	// 						results.innerHTML = JSON.parse(xhr.responseText).message;
-	// 				}
-	// 		};
-	// 		oReq.onreadystatechange = function () {
-	// 				console.log('Inside the onreadystatechange event with readyState: ' + toReadyStateDescription(oReq.readyState));
-	// 		};
-	// 		oReq.open('GET', e.target.dataset.url + bustCache, true);
-	// 		oReq.responseType = 'json';
-	// 		oReq.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-	// 		oReq.setRequestHeader('x-vanillaAjaxWithoutjQuery-version', '1.0');
-	// 		oReq.send();
-	// });
 	const email = document.getElementById('email_fld')
 	const name = document.getElementById('name_fld')
 
@@ -52,9 +13,7 @@
 		if(apiResponse.status == 422) {
 			notification.innerHTML = apiResponse.error
 			notification.style.color = 'red'
-		}
-
-		if(apiResponse.status === 200) {
+		} else if(apiResponse.status === 200) {
 			notification.innerHTML = apiResponse.message
 			notification.style.color = 'green'
 			
@@ -64,12 +23,20 @@
 				window.localStorage.setItem('token', apiResponse.data.authentication.token)
 				window.localStorage.setItem('id', apiResponse.data.id)
 			}	else if(apiResponse.data.length > 0) {
-				const listItems = apiResponse.data.map(record => {
-					return `<li>${record.name}</li>`
+				const listItems = apiResponse.data.forEach(record => {
+
+					var  li = document.createElement('li')
+					li.className = 'list-item'
+					li.id = 'member-' + record.id
+					li.innerHTML = `<a href="#" style="pointer: cursor">${record.name}</a>`
+					li.addEventListener('click', () => {
+						const container = li.id.split('-')
+						fetchOne(container[1])
+					})
+
+					document.getElementById('member-list-container').appendChild(li)
+
 				})
-
-				document.getElementById('member-list-container').innerHTML = listItems.join('')
-
 			}
 		}
 	}
@@ -97,11 +64,10 @@
 		ajax.responseType = 'text'
 		ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 		ajax.setRequestHeader(`Authorization`, `Bearer ${window.localStorage.getItem('token')}`)
-		console.log(`calling to get ... `)
 		ajax.send()
 	})
 
-	/*
+	
 	const fetchOne = (id) => {
 		ajax.open('GET', `http://10.6.0.7:3000/members/${id}`, true)
 		ajax.responseType = 'text'
@@ -109,6 +75,4 @@
 		ajax.setRequestHeader(`Authorization`, `Bearer ${window.localStorage.getItem('token')}`)
 		ajax.send()
 	}
-	*/
-
 }());
