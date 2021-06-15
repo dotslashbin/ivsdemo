@@ -14,6 +14,7 @@ services:
         image: 401895683222.dkr.ecr.us-east-1.amazonaws.com/ivsnginx:latest
         ports:
             - "80:80"
+            - "9080:9080"
         networks:
           ivsnetwork:
             ipv4_address: 10.6.0.8
