@@ -6,14 +6,13 @@ export default class MemberWriter {
 		params: {
 			email: string
 			name: string
-			password: string
 		},
 		db: DBWriter
 	): Promise<any> {
 		try {
 			const result = await db.Save(params)
 			const authGenerator = new AuthGenerator()
-			const token = authGenerator.GenerateToken(
+			const authentication = authGenerator.GenerateToken(
 				result.id,
 				result.email,
 				result.name
@@ -23,8 +22,7 @@ export default class MemberWriter {
 				id: result.id,
 				email: result.email,
 				name: result.name,
-				password: result.password,
-				token,
+				authentication,
 			}
 		} catch (error) {
 			return error

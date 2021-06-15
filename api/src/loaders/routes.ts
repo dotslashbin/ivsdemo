@@ -14,5 +14,5 @@ export default ({ app }: { app: express.Application }): void => {
 	app.get('/members/:memberId', express.urlencoded({ extended: true }), GetOne)
 
 	// POST
-	app.post('/sign-up', express.urlencoded({ extended: true }), SignUp)
+	app.post('/sign-up', express.json(), SignUp)
 }

@@ -74,9 +74,33 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
       working-directory: api
+
+  setup-frontend-app:
+    needs: create-app-image
+    name: Package the files for the testing webapp
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Move artifact to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST_IP }}
+        username: ${{ secrets.EC2_USERNAME }}
+        password: ${{ secrets.EC2_PASSWORD }}
+        target: /home/${{ secrets.EC2_USERNAME }}
+        script: |
+          cd ivsdemo
+          git pull 
+          git checkout main
+          git pull
+          sudo cp webapp/* /var/www/html/
     
   ec2-deployment:
-    needs: create-app-image
+    needs: setup-frontend-app
     name: Deploy app in server
     runs-on: ubuntu-latest
       
@@ -92,6 +116,8 @@ jobs:
           docker-compose down
           docker system prune --force
           docker image prune -a --force
+          docker volume prune --force
+          docker network prune --force
       
     - name: Deploy new app and run
       uses: appleboy/ssh-action@master
@@ -103,3 +129,4 @@ jobs:
         script: |
           aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 401895683222.dkr.ecr.us-east-1.amazonaws.com
           docker-compose up -d 
+          rm -Rf /home/ubuntu/webapp*
