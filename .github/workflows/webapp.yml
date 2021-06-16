@@ -35,4 +35,4 @@ jobs:
           cd ivsdemo
           sudo cp webapp/* /var/www/html/ -vf
           cd /var/www/html/
-          sed -i 's/10.6.0.7/54.205.163.31/g' ./index.js
+          sudo sed -i 's/10.6.0.7/54.205.163.31/g' ./index.js
