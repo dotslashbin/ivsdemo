@@ -19,11 +19,15 @@
 			notification.innerHTML = apiResponse.message
 			notification.style.color = 'green'
 			
-			document.getElementById('code-output').innerHTML = xhr.responseText
-
 			if(apiResponse.endPointName === "sign-up") {
 				window.localStorage.setItem('token', apiResponse.data.authentication.token)
 				window.localStorage.setItem('id', apiResponse.data.id)
+
+				let output = `<div>Email: <span class="output-value">${apiResponse.data.email}</span></div>`
+				output += `<div>Name: <span class="output-value">${apiResponse.data.name}</span></div>`
+				output += `<div>ID: <span class="output-value">${apiResponse.data.id}</span></div>`
+
+				document.getElementById('signup-ouput').innerHTML = output
 			}	else if(apiResponse.endPointName === "get-all") {
 				const listItems = apiResponse.data.forEach(record => {
 
@@ -40,8 +44,10 @@
 
 				})
 			} else if (apiResponse.endPointName === "get-one" ) {
-				document.getElementById('member-name').innerHTML = apiResponse.data.name
-				document.getElementById('member-email').innerHTML = apiResponse.data.email
+				let output = `<div>Email: <span class="output-value">${apiResponse.data.email}</span></div>`
+				output += `<div>Name: <span class="output-value">${apiResponse.data.name}</span></div>`
+
+				document.getElementById('member-detail-contianer').innerHTML = output
 			}
 		}
 	}

@@ -1,0 +1,38 @@
+name: IVS Demo Webapp Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  update-webapp:
+    name: Deploy app in server
+    runs-on: ubuntu-latest
+      
+    steps:
+    - name: Pull the latest changes of the webapp
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.WEBAPP_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        password: ${{ secrets.EC2_PASSWORD }}
+        target: /home/${{ secrets.EC2_USERNAME }}
+        script: |
+          cd ivsdemo
+          git pull
+          git checkout main
+          git pull 
+
+      
+    - name: Install the new files into nginx
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.WEBAPP_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        password: ${{ secrets.EC2_PASSWORD }}
+        target: /home/${{ secrets.EC2_USERNAME }}
+        script: |
+          cd ivsdemo
+          sudo cp webapp/* /var/www/html/ -vf
+          cd /var/www/html/
+          sudo sed -i 's/10.6.0.7/54.205.163.31/g' ./index.js
