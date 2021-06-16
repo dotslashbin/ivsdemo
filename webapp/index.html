@@ -11,7 +11,7 @@
             <h1>IVS Demo</h1>
         </div>
         <div class="container">
-            <div class="viewer">
+            <div class="views">
                 <form class="form-container" method="POST" action="http://localhost:3000/Sign-up" id="signup_form">
                     <div>
                         <p class="note">Fill up the form to sign up</p>
@@ -33,16 +33,17 @@
                     </div>
                 </form>
             </div>
-            <div class="viewer">
-                <code id="code-output">
-                    Debug output here
-                </code>
+            <div class="views">
+                <div class="output-display">
+                    <div id="signup-ouput">
+                    </div>
+                </div>
             </div>
             <div style="clear: both;"></div>
         </div>
         <hr />
         <div class="container">
-            <div class="viewer">
+            <div class="views">
                 <button id="showAll_btn">Show All</button>
                 <div class="member-detail-container">
                     <ol id="member-list-container">
@@ -50,14 +51,9 @@
                 </div>
             </div>
 
-            <div class="viewer">
-                <div class="member-detail-contianer">
-                    <h3>Current Member in view</h3>
-                    <div class="member-detail">
-                        Name: <span id="member-name"></span>
-                    </div>
-                    <div class="member-detail">
-                        Email: <span id="member-email"></span>
+            <div class="views">
+                <div class="output-display">
+                    <div id="member-detail-contianer">
                     </div>
                 </div>
             </div>
