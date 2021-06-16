@@ -1,7 +1,18 @@
 import { DBWriter } from '../../interfaces'
 import AuthGenerator from '../../services/auth/AuthGenerator'
 
+/**
+ * Contains implementation that provides the service
+ * for writing data into members
+ */
 export default class MemberWriter {
+	/**
+	 * Creates a new record
+	 *
+	 * @param params
+	 * @param db
+	 * @returns
+	 */
 	static async InsertNew(
 		params: {
 			email: string

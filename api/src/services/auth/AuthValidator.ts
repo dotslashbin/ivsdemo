@@ -2,6 +2,9 @@ import { APP_SECRET } from '../../config'
 import { decode, TAlgorithm } from 'jwt-simple'
 import { DecodeResult, Session } from '../../interfaces/Authentication'
 
+/**
+ * This class represents the service to validate a token
+ */
 export default class AuthValidator {
 	private secret: string
 
@@ -9,6 +12,11 @@ export default class AuthValidator {
 		this.secret = APP_SECRET
 	}
 
+	/**
+	 * Decodes a session from token
+	 * @param tokenString
+	 * @returns
+	 */
 	decodeSession(tokenString: string): DecodeResult {
 		// Always use HS512 to decode the token
 		const algorithm: TAlgorithm = 'HS512'
