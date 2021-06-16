@@ -1,4 +1,4 @@
-export const VERSION = '0.1.3'
+export const VERSION = '1.2.4'
 export const APP_SECRET = 'videostuff'
 
 // pagination
