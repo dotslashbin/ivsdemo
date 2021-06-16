@@ -20,7 +20,7 @@ jobs:
         script: |
           cd ivsdemo
           git pull
-          git checkout
+          git checkout style-frontend
           git pull 
 
       
