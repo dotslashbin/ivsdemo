@@ -2,7 +2,7 @@ name: IVS Demo Webapp Pipeline
 
 on:
   push:
-    branches: [ style-frontend ]
+    branches: [ main ]
 
 jobs:
   update-webapp:
@@ -20,7 +20,7 @@ jobs:
         script: |
           cd ivsdemo
           git pull
-          git checkout style-frontend
+          git checkout main
           git pull 
 
       
