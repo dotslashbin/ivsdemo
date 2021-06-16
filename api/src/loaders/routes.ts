@@ -2,6 +2,9 @@ import express from 'express'
 import { VERSION } from '../config'
 import { GetAll, GetOne, SignUp } from '../handlers'
 
+/**
+ * Route definitions with references to handlers
+ */
 export default ({ app }: { app: express.Application }): void => {
 	// Index -> shows version
 	app.get('/', (request, response) => {
