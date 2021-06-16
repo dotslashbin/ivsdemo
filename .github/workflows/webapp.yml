@@ -33,4 +33,4 @@ jobs:
         target: /home/${{ secrets.EC2_USERNAME }}
         script: |
           cd ivsdemo
-          cp webapp/* /var/www/html/ -vf
+          sudo cp webapp/* /var/www/html/ -vf
