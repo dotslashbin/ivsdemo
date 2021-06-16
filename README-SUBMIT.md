@@ -1,5 +1,7 @@
-ivsdemo
 # IVS Demo
+Submitted by
+**Joshua Fuentes**
+**joshuarpf@gmail.com**
 
 
 ## Intro
@@ -15,6 +17,22 @@ I hesitated on implementing a few features that were not in the specifications, 
 -   Deployed environments - I created free tier instances on EC2, one for the API and the other for the web app. I would have gone for containerized applications on ECS, but they were not free.
 
 ## Project Details
+
+### Links
+Repository:
+-   *Repository*: [https://github.com/dotslashbin/ivsdemo](https://github.com/dotslashbin/ivsdemo)
+- *Schema*: https://github.com/dotslashbin/ivsdemo/tree/main/api/src/models
+-   *Backend API URL*: http://ec2-54-205-163-31.compute-1.amazonaws.com:3000/members:3000
+-   *Frontend*: http://ec2-54-162-68-42.compute-1.amazonaws.com 
+
+### Stack
+1. Containerization - docker and docker-compose
+2. Languages - typescript, javascript, and HTML
+3. Frameworks - Nodejs with express
+4. Codebase repo: github
+5. CI / CD - github actions
+6. Hosting - AWS
+
 ### Running the application
 
 *Requirements*
@@ -73,3 +91,8 @@ Please ensure that you have these installed in your system before starting.
 3.  Let's create a member. Enter an email address and name and then click **Register**. Do for a couple of times to generate more records.
 4.  Click on **Show all** to display a list.
 5.  Click on a listen item to display the details of that member
+
+*AWS credentials*
+link - https://401895683222.signin.aws.amazon.com/console
+username: ivs
+password: Pass!@#$

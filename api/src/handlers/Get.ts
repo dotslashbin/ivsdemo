@@ -4,6 +4,16 @@ import { ReturnError, ReturnSuccess } from '../helpers/Response'
 import { RESPONSE_MESSAGES } from '../config'
 import MemberReader from '../services/members/MemberReader'
 
+/**
+ * Handler function for "get-all" requests.
+ *
+ * This should not contain or implement the entire process, but rather act as a
+ * middleman for it. It Utilizes services to execute the process, and calls to
+ * other functions for data manipulation and sending responses back to the
+ * endpoint.
+ * @param request
+ * @param response
+ */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export async function GetAll(
 	request: Request,
@@ -31,6 +41,16 @@ export async function GetAll(
 	}
 }
 
+/**
+ * Handler function for the "get-one"
+ *
+ * This should not contain or implement the entire process, but rather act as a
+ * middleman for it. It Utilizes services to execute the process, and calls to
+ * other functions for data manipulation and sending responses back to the
+ * endpoint.
+ * @param request
+ * @param response
+ */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export async function GetOne(
 	request: Request,

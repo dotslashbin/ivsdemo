@@ -1,4 +1,10 @@
 import { Request } from 'express'
+
+/**
+ * Mehtod to return the token portion of the authentcation
+ * @param req
+ * @returns
+ */
 export const ExtractToken = (req: Request): any => {
 	if (
 		req.headers.authorization &&

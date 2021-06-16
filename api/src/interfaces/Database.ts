@@ -1,3 +1,7 @@
+/**
+ * This file contains the the interface definitions
+ * for the database classes
+ */
 export interface DBConnector {
 	Connect(): void
 }

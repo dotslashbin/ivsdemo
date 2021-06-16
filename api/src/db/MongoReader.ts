@@ -4,6 +4,12 @@ import { getModelForClass } from '@typegoose/typegoose'
 import { Member } from '../models/MemberModel'
 import { DEFAULT_PAGE, DEFAULT_LIMIT } from '../config'
 
+/**
+ * A class with the purpose of writing into a mongo db database.
+ *
+ * Note:
+ * Other databases to be handled in the future are to be patterned from this one.
+ */
 export class MongoReader extends DBCore implements DBReader {
 	private page: number
 	private limit: number
@@ -14,6 +20,12 @@ export class MongoReader extends DBCore implements DBReader {
 		this.limit = DEFAULT_LIMIT
 	}
 
+	/**
+	 * Method to fetch a collection of records
+	 *
+	 * @param params
+	 * @returns
+	 */
 	Fetch(params: { page: any; limit: any }): any {
 		const memberModel = getModelForClass(Member)
 
@@ -30,6 +42,11 @@ export class MongoReader extends DBCore implements DBReader {
 		}
 	}
 
+	/**
+	 * A method to fetch one record
+	 * @param params
+	 * @returns
+	 */
 	FetchOne(params: any): any {
 		const memberModel = getModelForClass(Member)
 		const { memberId } = params
@@ -43,6 +60,11 @@ export class MongoReader extends DBCore implements DBReader {
 		}
 	}
 
+	/**
+	 * This generates the "skip" value for the pagination feature.
+	 * @param page
+	 * @returns
+	 */
 	private getSkipFromPage(page: number): number {
 		// $this->skip = ($page > 0)? ($page - 1) * $this->limit: config('app.DEFAULT_SKIP');
 		return page > 0 ? (this.page - 1) * this.limit : 0
