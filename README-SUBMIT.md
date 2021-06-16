@@ -94,4 +94,5 @@ Please ensure that you have these installed in your system before starting.
 
 *AWS credentials*
 link - https://401895683222.signin.aws.amazon.com/console
+username: ivs
 password: Pass!@#$
